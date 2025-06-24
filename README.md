@@ -1,15 +1,15 @@
-Redis Simple Message Queue
---------------------------
+## Redis Simple Message Queue
+
 [![Build Status](https://travis-ci.com/abreksa4/php-rsmq.svg?branch=master)](https://travis-ci.com/abreksa4/php-rsmq)
 [![codecov](https://codecov.io/gh/abreksa4/php-rsmq/branch/master/graph/badge.svg)](https://codecov.io/gh/abreksa4/php-rsmq)
-[![License](https://poser.pugx.org/andrewbreksa/rsmq/license)](//packagist.org/packages/andrewbreksa/rsmq)
+[![License](https://poser.pugx.org/dennsliu/rsmq/license)](//packagist.org/packages/dennsliu/rsmq)
 [![GitHub issues](https://img.shields.io/github/issues/abreksa4/php-rsmq)](https://github.com/abreksa4/php-rsmq/issues)
-[![Latest Stable Version](https://poser.pugx.org/andrewbreksa/rsmq/v)](//packagist.org/packages/andrewbreksa/rsmq)
-[![Latest Unstable Version](https://poser.pugx.org/andrewbreksa/rsmq/v/unstable)](//packagist.org/packages/andrewbreksa/rsmq)
-[![composer.lock](https://poser.pugx.org/andrewbreksa/rsmq/composerlock)](//packagist.org/packages/andrewbreksa/rsmq)
-[![Total Downloads](https://poser.pugx.org/andrewbreksa/rsmq/downloads)](//packagist.org/packages/andrewbreksa/rsmq)
+[![Latest Stable Version](https://poser.pugx.org/dennsliu/rsmq/v)](//packagist.org/packages/dennsliu/rsmq)
+[![Latest Unstable Version](https://poser.pugx.org/dennsliu/rsmq/v/unstable)](//packagist.org/packages/dennsliu/rsmq)
+[![composer.lock](https://poser.pugx.org/dennsliu/rsmq/composerlock)](//packagist.org/packages/dennsliu/rsmq)
+[![Total Downloads](https://poser.pugx.org/dennsliu/rsmq/downloads)](//packagist.org/packages/dennsliu/rsmq)
 [![GitHub stars](https://img.shields.io/github/stars/abreksa4/php-rsmq)](https://github.com/abreksa4/php-rsmq/stargazers)
-[![Dependents](https://poser.pugx.org/andrewbreksa/rsmq/dependents)](//packagist.org/packages/andrewbreksa/rsmq)
+[![Dependents](https://poser.pugx.org/dennsliu/rsmq/dependents)](//packagist.org/packages/dennsliu/rsmq)
 
 A lightweight message queue for PHP that requires no dedicated queue server. Just a Redis server. See
 [smrchy/rsmq](https://github.com/smrchy/rsmq) for more information.
@@ -26,20 +26,20 @@ This is a fork of [eislambey/php-rsmq](https://github.com/eislambey/php-rsmq) wi
 
 - [Installation](#installation)
 - [Methods](#methods)
-  * [Construct](#construct)
-  * [Queue](#queue)
-    + [createQueue](#createqueue)
-    + [listQueues](#listqueues)
-    + [deleteQueue](#deletequeue)
-    + [getQueueAttributes](#getqueueattributes)
-    + [setQueueAttributes](#setqueueattributes)
-  * [Messages](#messages)
-    + [sendMessage](#sendmessage)
-    + [receiveMessage](#receivemessage)
-    + [deleteMessage](#deletemessage)
-    + [popMessage](#popmessage)
-    + [changeMessageVisibility](#changemessagevisibility)
-  * [Realtime](#realtime)
+  - [Construct](#construct)
+  - [Queue](#queue)
+    - [createQueue](#createqueue)
+    - [listQueues](#listqueues)
+    - [deleteQueue](#deletequeue)
+    - [getQueueAttributes](#getqueueattributes)
+    - [setQueueAttributes](#setqueueattributes)
+  - [Messages](#messages)
+    - [sendMessage](#sendmessage)
+    - [receiveMessage](#receivemessage)
+    - [deleteMessage](#deletemessage)
+    - [popMessage](#popmessage)
+    - [changeMessageVisibility](#changemessagevisibility)
+  - [Realtime](#realtime)
 - [QueueWorker](#queueworker)
 - [LICENSE](#license)
 
@@ -47,7 +47,7 @@ This is a fork of [eislambey/php-rsmq](https://github.com/eislambey/php-rsmq) wi
 
 # Installation
 
-    composer require andrewbreksa/rsmq
+    composer require dennsliu/rsmq
 
 # Methods
 
@@ -57,16 +57,16 @@ Creates a new instance of RSMQ.
 
 Parameters:
 
-* `$predis` (\Predis\ClientInterface): *required The Predis instance
-* `$ns` (string): *optional (Default: "rsmq")* The namespace prefix used for all keys created by RSMQ
-* `$realtime` (Boolean): *optional (Default: false)* Enable realtime PUBLISH of new messages
+- `$predis` (\Predis\ClientInterface): \*required The Predis instance
+- `$ns` (string): _optional (Default: "rsmq")_ The namespace prefix used for all keys created by RSMQ
+- `$realtime` (Boolean): _optional (Default: false)_ Enable realtime PUBLISH of new messages
 
 Example:
 
 ```php
 <?php
 use Predis\Client;
-use AndrewBreksa\RSMQ\RSMQClient;
+use dennsliu\RSMQ\RSMQClient;
 
 $predis = new Client(
     [
@@ -85,29 +85,29 @@ Create a new queue.
 
 Parameters:
 
-* `$name` (string): The Queue name. Maximum 160 characters; alphanumeric characters, hyphens (-), and underscores (_)
+- `$name` (string): The Queue name. Maximum 160 characters; alphanumeric characters, hyphens (-), and underscores (\_)
   are allowed.
-* `$vt` (int): *optional* *(Default: 30)* The length of time, in seconds, that a message received from a queue will be
+- `$vt` (int): _optional_ _(Default: 30)_ The length of time, in seconds, that a message received from a queue will be
   invisible to other receiving components when they ask to receive messages. Allowed values: 0-9999999 (around 115 days)
-* `$delay` (int): *optional* *(Default: 0)* The time in seconds that the delivery of all new messages in the queue will
+- `$delay` (int): _optional_ _(Default: 0)_ The time in seconds that the delivery of all new messages in the queue will
   be delayed. Allowed values: 0-9999999 (around 115 days)
-* `$maxsize` (int): *optional* *(Default: 65536)* The maximum message size in bytes. Allowed values: 1024-65536 and -1
+- `$maxsize` (int): _optional_ _(Default: 65536)_ The maximum message size in bytes. Allowed values: 1024-65536 and -1
   (for unlimited size)
 
 Returns:
 
-* `true` (Bool)
+- `true` (Bool)
 
 Throws:
 
-* `\AndrewBreksa\RSMQ\Exceptions\QueueAlreadyExistsException`
+- `\dennsliu\RSMQ\Exceptions\QueueAlreadyExistsException`
 
 Example:
 
 ```php
 <?php
 /**
- * @var AndrewBreksa\RSMQ\RSMQClientInterface $rsmq
+ * @var dennsliu\RSMQ\RSMQClientInterface $rsmq
  */
 
 $rsmq->createQueue('myqueue');
@@ -119,14 +119,14 @@ List all queues
 
 Returns an array:
 
-* `["qname1", "qname2"]`
+- `["qname1", "qname2"]`
 
 Example:
 
 ```php
 <?php
 /**
- * @var AndrewBreksa\RSMQ\RSMQClientInterface $rsmq
+ * @var dennsliu\RSMQ\RSMQClientInterface $rsmq
  */
 
 $queues = $rsmq->listQueues();
@@ -138,22 +138,22 @@ Deletes a queue and all messages.
 
 Parameters:
 
-* `$name` (string): The Queue name.
+- `$name` (string): The Queue name.
 
 Returns:
 
-* `true` (Bool)
+- `true` (Bool)
 
 Throws:
 
-* `\AndrewBreksa\RSMQ\Exceptions\QueueNotFoundException`
+- `\dennsliu\RSMQ\Exceptions\QueueNotFoundException`
 
 Example:
 
 ```php
 <?php
 /**
- * @var AndrewBreksa\RSMQ\RSMQClientInterface $rsmq
+ * @var dennsliu\RSMQ\RSMQClientInterface $rsmq
  */
 
 $rsmq->deleteQueue('myqueue');
@@ -165,19 +165,19 @@ Get queue attributes, counter and stats
 
 Parameters:
 
-* `$queue` (string): The Queue name.
+- `$queue` (string): The Queue name.
 
-Returns a `\AndrewBreksa\RSMQ\QueueAttributes` object with the following properties:
+Returns a `\dennsliu\RSMQ\QueueAttributes` object with the following properties:
 
-* `vt` (int): The visibility timeout for the queue in seconds
-* `delay` (int): The delay for new messages in seconds
-* `maxSize` (int): The maximum size of a message in bytes
-* `totalReceived` (int): Total number of messages received from the queue
-* `totalSent` (int): Total number of messages sent to the queue
-* `created` (float): Timestamp (epoch in seconds) when the queue was created
-* `modified` (float): Timestamp (epoch in seconds) when the queue was last modified with `setQueueAttributes`
-* `messageCount` (int): Current number of messages in the queue
-* `hiddenMessageCount` (int): Current number of hidden / not visible messages. A message can be hidden while "in flight"
+- `vt` (int): The visibility timeout for the queue in seconds
+- `delay` (int): The delay for new messages in seconds
+- `maxSize` (int): The maximum size of a message in bytes
+- `totalReceived` (int): Total number of messages received from the queue
+- `totalSent` (int): Total number of messages sent to the queue
+- `created` (float): Timestamp (epoch in seconds) when the queue was created
+- `modified` (float): Timestamp (epoch in seconds) when the queue was last modified with `setQueueAttributes`
+- `messageCount` (int): Current number of messages in the queue
+- `hiddenMessageCount` (int): Current number of hidden / not visible messages. A message can be hidden while "in flight"
   due to a `vt` parameter or when sent with a `delay`
 
 Example:
@@ -185,7 +185,7 @@ Example:
 ```php
 <?php
 /**
- * @var AndrewBreksa\RSMQ\RSMQClientInterface $rsmq
+ * @var dennsliu\RSMQ\RSMQClientInterface $rsmq
  */
 
 $attributes =  $rsmq->getQueueAttributes('myqueue');
@@ -206,40 +206,40 @@ Sets queue parameters.
 
 Parameters:
 
-* `$queue` (string): The Queue name.
-* `$vt` (int): *optional* * The length of time, in seconds, that a message received from a queue will be invisible to
+- `$queue` (string): The Queue name.
+- `$vt` (int): _optional_ \* The length of time, in seconds, that a message received from a queue will be invisible to
   other receiving components when they ask to receive messages. Allowed values: 0-9999999 (around 115 days)
-* `$delay` (int): *optional* The time in seconds that the delivery of all new messages in the queue will be delayed.
+- `$delay` (int): _optional_ The time in seconds that the delivery of all new messages in the queue will be delayed.
   Allowed values: 0-9999999 (around 115 days)
-* `$maxsize` (int): *optional* The maximum message size in bytes. Allowed values: 1024-65536 and -1 (for unlimited size)
+- `$maxsize` (int): _optional_ The maximum message size in bytes. Allowed values: 1024-65536 and -1 (for unlimited size)
 
 Note: At least one attribute (vt, delay, maxsize) must be supplied. Only attributes that are supplied will be modified.
 
-Returns a `\AndrewBreksa\RSMQ\QueueAttributes` object with the following properties:
+Returns a `\dennsliu\RSMQ\QueueAttributes` object with the following properties:
 
-* `vt` (int): The visibility timeout for the queue in seconds
-* `delay` (int): The delay for new messages in seconds
-* `maxSize` (int): The maximum size of a message in bytes
-* `totalReceived` (int): Total number of messages received from the queue
-* `totalSent` (int): Total number of messages sent to the queue
-* `created` (float): Timestamp (epoch in seconds) when the queue was created
-* `modified` (float): Timestamp (epoch in seconds) when the queue was last modified with `setQueueAttributes`
-* `messageCount` (int): Current number of messages in the queue
-* `hiddenMessageCount` (int): Current number of hidden / not visible messages. A message can be hidden while "in flight"
+- `vt` (int): The visibility timeout for the queue in seconds
+- `delay` (int): The delay for new messages in seconds
+- `maxSize` (int): The maximum size of a message in bytes
+- `totalReceived` (int): Total number of messages received from the queue
+- `totalSent` (int): Total number of messages sent to the queue
+- `created` (float): Timestamp (epoch in seconds) when the queue was created
+- `modified` (float): Timestamp (epoch in seconds) when the queue was last modified with `setQueueAttributes`
+- `messageCount` (int): Current number of messages in the queue
+- `hiddenMessageCount` (int): Current number of hidden / not visible messages. A message can be hidden while "in flight"
   due to a `vt` parameter or when sent with a `delay`
 
 Throws:
 
-* `\AndrewBreksa\RSMQ\QueueAttributes`
-* `\AndrewBreksa\RSMQ\QueueParametersValidationException`
-* `\AndrewBreksa\RSMQ\QueueNotFoundException`
+- `\dennsliu\RSMQ\QueueAttributes`
+- `\dennsliu\RSMQ\QueueParametersValidationException`
+- `\dennsliu\RSMQ\QueueNotFoundException`
 
 Example:
 
 ```php
 <?php
 /**
- * @var AndrewBreksa\RSMQ\RSMQClientInterface $rsmq
+ * @var dennsliu\RSMQ\RSMQClientInterface $rsmq
  */
 
 $queue = 'myqueue';
@@ -257,27 +257,27 @@ Sends a new message.
 
 Parameters:
 
-* `$queue` (string)
-* `$message` (string)
-* `$delay` (int): *optional* *(Default: queue settings)* The time in seconds that the delivery of the message will be
+- `$queue` (string)
+- `$message` (string)
+- `$delay` (int): _optional_ _(Default: queue settings)_ The time in seconds that the delivery of the message will be
   delayed. Allowed values: 0-9999999 (around 115 days)
 
 Returns:
 
-* `$id` (string): The internal message id.
+- `$id` (string): The internal message id.
 
 Throws:
 
-* `\AndrewBreksa\RSMQ\Exceptions\MessageToLongException`
-* `\AndrewBreksa\RSMQ\Exceptions\QueueNotFoundException`
-* `\AndrewBreksa\RSMQ\Exceptions\QueueParametersValidationException`
+- `\dennsliu\RSMQ\Exceptions\MessageToLongException`
+- `\dennsliu\RSMQ\Exceptions\QueueNotFoundException`
+- `\dennsliu\RSMQ\Exceptions\QueueParametersValidationException`
 
 Example:
 
 ```php
 <?php
 /**
- * @var AndrewBreksa\RSMQ\RSMQClientInterface $rsmq
+ * @var dennsliu\RSMQ\RSMQClientInterface $rsmq
  */
 
 $id = $rsmq->sendMessage('myqueue', 'a message');
@@ -290,31 +290,31 @@ Receive the next message from the queue.
 
 Parameters:
 
-* `$queue` (string): The Queue name.
-* `$vt` (int): *optional* *(Default: queue settings)* The length of time, in seconds, that the received message will be
+- `$queue` (string): The Queue name.
+- `$vt` (int): _optional_ _(Default: queue settings)_ The length of time, in seconds, that the received message will be
   invisible to others. Allowed values: 0-9999999 (around 115 days)
 
-Returns a `\AndrewBreksa\RSMQ\Message` object with the following properties:
+Returns a `\dennsliu\RSMQ\Message` object with the following properties:
 
-* `message` (string): The message's contents.
-* `id` (string): The internal message id.
-* `sent` (int): Timestamp of when this message was sent / created.
-* `firstReceived` (int): Timestamp of when this message was first received.
-* `receiveCount` (int): Number of times this message was received.
+- `message` (string): The message's contents.
+- `id` (string): The internal message id.
+- `sent` (int): Timestamp of when this message was sent / created.
+- `firstReceived` (int): Timestamp of when this message was first received.
+- `receiveCount` (int): Number of times this message was received.
 
 Note: Will return an empty array if no message is there
 
 Throws:
 
-* `\AndrewBreksa\RSMQ\Exceptions\QueueNotFoundException`
-* `\AndrewBreksa\RSMQ\Exceptions\QueueParametersValidationException`
+- `\dennsliu\RSMQ\Exceptions\QueueNotFoundException`
+- `\dennsliu\RSMQ\Exceptions\QueueParametersValidationException`
 
 Example:
 
 ```php
 <?php
 /**
- * @var AndrewBreksa\RSMQ\RSMQClientInterface $rsmq
+ * @var dennsliu\RSMQ\RSMQClientInterface $rsmq
  */
 
 $message = $rsmq->receiveMessage('myqueue');
@@ -326,23 +326,23 @@ echo "Message: ", $message->getMessage();
 
 Parameters:
 
-* `$queue` (string): The Queue name.
-* `$id` (string): message id to delete.
+- `$queue` (string): The Queue name.
+- `$id` (string): message id to delete.
 
 Returns:
 
-* `true` if successful, `false` if the message was not found (bool).
+- `true` if successful, `false` if the message was not found (bool).
 
 Throws:
 
-* `\AndrewBreksa\RSMQ\Exceptions\QueueParametersValidationException`
+- `\dennsliu\RSMQ\Exceptions\QueueParametersValidationException`
 
 Example:
 
 ```php
 <?php
 /**
- * @var AndrewBreksa\RSMQ\RSMQClientInterface $rsmq
+ * @var dennsliu\RSMQ\RSMQClientInterface $rsmq
  */
 
 $id = $rsmq->sendMessage('queue', 'a message');
@@ -358,29 +358,29 @@ something goes wrong while working on the message.
 
 Parameters:
 
-* `$queue` (string): The Queue name.
+- `$queue` (string): The Queue name.
 
-Returns a `\AndrewBreksa\RSMQ\Message` object with the following properties:
+Returns a `\dennsliu\RSMQ\Message` object with the following properties:
 
-* `message` (string): The message's contents.
-* `id` (string): The internal message id.
-* `sent` (int): Timestamp of when this message was sent / created.
-* `firstReceived` (int): Timestamp of when this message was first received.
-* `receiveCount` (int): Number of times this message was received.
+- `message` (string): The message's contents.
+- `id` (string): The internal message id.
+- `sent` (int): Timestamp of when this message was sent / created.
+- `firstReceived` (int): Timestamp of when this message was first received.
+- `receiveCount` (int): Number of times this message was received.
 
 Note: Will return an empty object if no message is there
 
 Throws:
 
-* `\AndrewBreksa\RSMQ\Exceptions\QueueNotFoundException`
-* `\AndrewBreksa\RSMQ\Exceptions\QueueParametersValidationException`
+- `\dennsliu\RSMQ\Exceptions\QueueNotFoundException`
+- `\dennsliu\RSMQ\Exceptions\QueueParametersValidationException`
 
 Example:
 
 ```php
 <?php
 /**
- * @var AndrewBreksa\RSMQ\RSMQClientInterface $rsmq
+ * @var dennsliu\RSMQ\RSMQClientInterface $rsmq
  */
 
 $message = $rsmq->popMessage('myqueue');
@@ -395,26 +395,26 @@ current time (now) + `vt`.
 
 Parameters:
 
-* `qname` (string): The Queue name.
-* `id` (string): The message id.
-* `vt` (int): The length of time, in seconds, that this message will not be visible. Allowed values: 0-9999999 (around
+- `qname` (string): The Queue name.
+- `id` (string): The message id.
+- `vt` (int): The length of time, in seconds, that this message will not be visible. Allowed values: 0-9999999 (around
   115 days)
 
 Returns:
 
-* `true` if successful, `false` if the message was not found (bool).
+- `true` if successful, `false` if the message was not found (bool).
 
 Throws:
 
-* `\AndrewBreksa\RSMQ\Exceptions\QueueParametersValidationException`
-* `\AndrewBreksa\RSMQ\Exceptions\QueueNotFoundException`
+- `\dennsliu\RSMQ\Exceptions\QueueParametersValidationException`
+- `\dennsliu\RSMQ\Exceptions\QueueNotFoundException`
 
 Example:
 
 ```php
 <?php
 /**
- * @var AndrewBreksa\RSMQ\RSMQClientInterface $rsmq
+ * @var dennsliu\RSMQ\RSMQClientInterface $rsmq
  */
 
 $queue = 'myqueue';
@@ -426,15 +426,15 @@ if($rsmq->changeMessageVisibility($queue, $id, 60)) {
 
 ## Realtime
 
-When creating an instance of  `AndrewBreksa\RSMQ\RSMQClient`, you can enable the realtime `PUBLISH` for new messages by
-passing `true` for the `$realtime` argument of `\AndrewBreksa\RSMQ\RSMQClient::__construct`. On every new message that
+When creating an instance of `dennsliu\RSMQ\RSMQClient`, you can enable the realtime `PUBLISH` for new messages by
+passing `true` for the `$realtime` argument of `\dennsliu\RSMQ\RSMQClient::__construct`. On every new message that
 is sent via `sendMessage`, a Redis `PUBLISH` will be issued to `{rsmq.ns}:rt:{qname}`.
 
 Example for RSMQ with default settings:
 
-* The queue `testQueue` already contains 5 messages.
-* A new message is being sent to the queue `testQueue`.
-* The following Redis command will be issued: `PUBLISH rsmq:rt:testQueue 6`
+- The queue `testQueue` already contains 5 messages.
+- A new message is being sent to the queue `testQueue`.
+- The following Redis command will be issued: `PUBLISH rsmq:rt:testQueue 6`
 
 The realtime option enables sending a `PUBLISH` when a new message is sent to RSMQ, however no further functionality is
 built on this feature. Your app could use the Redis `SUBSCRIBE` command to be notified of new messages and then attempt
@@ -449,13 +449,13 @@ The QueueWorker class provides an easy way to consume RSMQ messages, to use it:
 ```php
 <?php
 /**
- * @var AndrewBreksa\RSMQ\RSMQClientInterface $rsmq
+ * @var dennsliu\RSMQ\RSMQClientInterface $rsmq
  */
 
-use AndrewBreksa\RSMQ\ExecutorInterface;
-use AndrewBreksa\RSMQ\Message;
-use AndrewBreksa\RSMQ\QueueWorker;
-use AndrewBreksa\RSMQ\WorkerSleepProvider;
+use dennsliu\RSMQ\ExecutorInterface;
+use dennsliu\RSMQ\Message;
+use dennsliu\RSMQ\QueueWorker;
+use dennsliu\RSMQ\WorkerSleepProvider;
 
 $executor = new class() implements ExecutorInterface{
     public function __invoke(Message $message) : bool {
