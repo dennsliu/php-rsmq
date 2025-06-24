@@ -1,7 +1,7 @@
 <?php
 
 use PHPUnit\Framework\TestCase;
-use function AndrewBreksa\RSMQ\{formatZeroPad, makeID};
+use function Dennsliu\RSMQ\{formatZeroPad, makeID};
 
 class FunctionsTest extends TestCase
 {

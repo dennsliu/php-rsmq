@@ -1,5 +1,5 @@
 {
-  "name": "andrewbreksa/rsmq",
+  "name": "dennsliu/rsmq",
   "description": "Redis Simple Message Queue.",
   "type": "library",
   "license": "MIT",
@@ -11,7 +11,7 @@
     },
     {
       "name": "Andrew Breksa",
-      "email": "andrew@andrewbreksa.com"
+      "email": "dennyliu@gmail.com"
     }
   ],
   "require": {
@@ -21,7 +21,7 @@
   },
   "autoload": {
     "psr-4": {
-      "AndrewBreksa\\RSMQ\\": "src/"
+      "Dennsliu\\RSMQ\\": "src/"
     },
     "files": [
       "./src/functions_include.php"

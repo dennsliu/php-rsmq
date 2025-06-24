@@ -100,14 +100,14 @@ Returns:
 
 Throws:
 
-- `\dennsliu\RSMQ\Exceptions\QueueAlreadyExistsException`
+- `\Dennsliu\RSMQ\Exceptions\QueueAlreadyExistsException`
 
 Example:
 
 ```php
 <?php
 /**
- * @var dennsliu\RSMQ\RSMQClientInterface $rsmq
+ * @var Dennsliu\RSMQ\RSMQClientInterface $rsmq
  */
 
 $rsmq->createQueue('myqueue');
@@ -126,7 +126,7 @@ Example:
 ```php
 <?php
 /**
- * @var dennsliu\RSMQ\RSMQClientInterface $rsmq
+ * @var Dennsliu\RSMQ\RSMQClientInterface $rsmq
  */
 
 $queues = $rsmq->listQueues();
@@ -146,14 +146,14 @@ Returns:
 
 Throws:
 
-- `\dennsliu\RSMQ\Exceptions\QueueNotFoundException`
+- `\Dennsliu\RSMQ\Exceptions\QueueNotFoundException`
 
 Example:
 
 ```php
 <?php
 /**
- * @var dennsliu\RSMQ\RSMQClientInterface $rsmq
+ * @var Dennsliu\RSMQ\RSMQClientInterface $rsmq
  */
 
 $rsmq->deleteQueue('myqueue');
@@ -167,7 +167,7 @@ Parameters:
 
 - `$queue` (string): The Queue name.
 
-Returns a `\dennsliu\RSMQ\QueueAttributes` object with the following properties:
+Returns a `\Dennsliu\RSMQ\QueueAttributes` object with the following properties:
 
 - `vt` (int): The visibility timeout for the queue in seconds
 - `delay` (int): The delay for new messages in seconds
@@ -215,7 +215,7 @@ Parameters:
 
 Note: At least one attribute (vt, delay, maxsize) must be supplied. Only attributes that are supplied will be modified.
 
-Returns a `\dennsliu\RSMQ\QueueAttributes` object with the following properties:
+Returns a `\Dennsliu\RSMQ\QueueAttributes` object with the following properties:
 
 - `vt` (int): The visibility timeout for the queue in seconds
 - `delay` (int): The delay for new messages in seconds
@@ -230,16 +230,16 @@ Returns a `\dennsliu\RSMQ\QueueAttributes` object with the following properties:
 
 Throws:
 
-- `\dennsliu\RSMQ\QueueAttributes`
-- `\dennsliu\RSMQ\QueueParametersValidationException`
-- `\dennsliu\RSMQ\QueueNotFoundException`
+- `\Dennsliu\RSMQ\QueueAttributes`
+- `\Dennsliu\RSMQ\QueueParametersValidationException`
+- `\Dennsliu\RSMQ\QueueNotFoundException`
 
 Example:
 
 ```php
 <?php
 /**
- * @var dennsliu\RSMQ\RSMQClientInterface $rsmq
+ * @var Dennsliu\RSMQ\RSMQClientInterface $rsmq
  */
 
 $queue = 'myqueue';
@@ -268,16 +268,16 @@ Returns:
 
 Throws:
 
-- `\dennsliu\RSMQ\Exceptions\MessageToLongException`
-- `\dennsliu\RSMQ\Exceptions\QueueNotFoundException`
-- `\dennsliu\RSMQ\Exceptions\QueueParametersValidationException`
+- `\Dennsliu\RSMQ\Exceptions\MessageToLongException`
+- `\Dennsliu\RSMQ\Exceptions\QueueNotFoundException`
+- `\Dennsliu\RSMQ\Exceptions\QueueParametersValidationException`
 
 Example:
 
 ```php
 <?php
 /**
- * @var dennsliu\RSMQ\RSMQClientInterface $rsmq
+ * @var Dennsliu\RSMQ\RSMQClientInterface $rsmq
  */
 
 $id = $rsmq->sendMessage('myqueue', 'a message');
@@ -294,7 +294,7 @@ Parameters:
 - `$vt` (int): _optional_ _(Default: queue settings)_ The length of time, in seconds, that the received message will be
   invisible to others. Allowed values: 0-9999999 (around 115 days)
 
-Returns a `\dennsliu\RSMQ\Message` object with the following properties:
+Returns a `\Dennsliu\RSMQ\Message` object with the following properties:
 
 - `message` (string): The message's contents.
 - `id` (string): The internal message id.
@@ -306,15 +306,15 @@ Note: Will return an empty array if no message is there
 
 Throws:
 
-- `\dennsliu\RSMQ\Exceptions\QueueNotFoundException`
-- `\dennsliu\RSMQ\Exceptions\QueueParametersValidationException`
+- `\Dennsliu\RSMQ\Exceptions\QueueNotFoundException`
+- `\Dennsliu\RSMQ\Exceptions\QueueParametersValidationException`
 
 Example:
 
 ```php
 <?php
 /**
- * @var dennsliu\RSMQ\RSMQClientInterface $rsmq
+ * @var Dennsliu\RSMQ\RSMQClientInterface $rsmq
  */
 
 $message = $rsmq->receiveMessage('myqueue');
@@ -335,14 +335,14 @@ Returns:
 
 Throws:
 
-- `\dennsliu\RSMQ\Exceptions\QueueParametersValidationException`
+- `\Dennsliu\RSMQ\Exceptions\QueueParametersValidationException`
 
 Example:
 
 ```php
 <?php
 /**
- * @var dennsliu\RSMQ\RSMQClientInterface $rsmq
+ * @var Dennsliu\RSMQ\RSMQClientInterface $rsmq
  */
 
 $id = $rsmq->sendMessage('queue', 'a message');
@@ -360,7 +360,7 @@ Parameters:
 
 - `$queue` (string): The Queue name.
 
-Returns a `\dennsliu\RSMQ\Message` object with the following properties:
+Returns a `\Dennsliu\RSMQ\Message` object with the following properties:
 
 - `message` (string): The message's contents.
 - `id` (string): The internal message id.
@@ -372,15 +372,15 @@ Note: Will return an empty object if no message is there
 
 Throws:
 
-- `\dennsliu\RSMQ\Exceptions\QueueNotFoundException`
-- `\dennsliu\RSMQ\Exceptions\QueueParametersValidationException`
+- `\Dennsliu\RSMQ\Exceptions\QueueNotFoundException`
+- `\Dennsliu\RSMQ\Exceptions\QueueParametersValidationException`
 
 Example:
 
 ```php
 <?php
 /**
- * @var dennsliu\RSMQ\RSMQClientInterface $rsmq
+ * @var Dennsliu\RSMQ\RSMQClientInterface $rsmq
  */
 
 $message = $rsmq->popMessage('myqueue');
@@ -406,15 +406,15 @@ Returns:
 
 Throws:
 
-- `\dennsliu\RSMQ\Exceptions\QueueParametersValidationException`
-- `\dennsliu\RSMQ\Exceptions\QueueNotFoundException`
+- `\Dennsliu\RSMQ\Exceptions\QueueParametersValidationException`
+- `\Dennsliu\RSMQ\Exceptions\QueueNotFoundException`
 
 Example:
 
 ```php
 <?php
 /**
- * @var dennsliu\RSMQ\RSMQClientInterface $rsmq
+ * @var Dennsliu\RSMQ\RSMQClientInterface $rsmq
  */
 
 $queue = 'myqueue';
@@ -426,8 +426,8 @@ if($rsmq->changeMessageVisibility($queue, $id, 60)) {
 
 ## Realtime
 
-When creating an instance of `dennsliu\RSMQ\RSMQClient`, you can enable the realtime `PUBLISH` for new messages by
-passing `true` for the `$realtime` argument of `\dennsliu\RSMQ\RSMQClient::__construct`. On every new message that
+When creating an instance of `Dennsliu\RSMQ\RSMQClient`, you can enable the realtime `PUBLISH` for new messages by
+passing `true` for the `$realtime` argument of `\Dennsliu\RSMQ\RSMQClient::__construct`. On every new message that
 is sent via `sendMessage`, a Redis `PUBLISH` will be issued to `{rsmq.ns}:rt:{qname}`.
 
 Example for RSMQ with default settings:
@@ -452,10 +452,10 @@ The QueueWorker class provides an easy way to consume RSMQ messages, to use it:
  * @var dennsliu\RSMQ\RSMQClientInterface $rsmq
  */
 
-use dennsliu\RSMQ\ExecutorInterface;
-use dennsliu\RSMQ\Message;
-use dennsliu\RSMQ\QueueWorker;
-use dennsliu\RSMQ\WorkerSleepProvider;
+use Dennsliu\RSMQ\ExecutorInterface;
+use Dennsliu\RSMQ\Message;
+use Dennsliu\RSMQ\QueueWorker;
+use Dennsliu\RSMQ\WorkerSleepProvider;
 
 $executor = new class() implements ExecutorInterface{
     public function __invoke(Message $message) : bool {

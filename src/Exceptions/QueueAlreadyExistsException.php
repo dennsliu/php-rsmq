@@ -1,7 +1,9 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 
-namespace AndrewBreksa\RSMQ\Exceptions;
+namespace Dennsliu\RSMQ\Exceptions;
 
 
 use Exception;
@@ -9,10 +11,7 @@ use Exception;
 /**
  * Class QueueAlreadyExistsException
  *
- * @package AndrewBreksa\RSMQ\Exceptions
- * @author  Andrew Breksa <andrew@andrewbreksa.com>
+ * @package Dennsliu\RSMQ\Exceptions
+ * @author  Andrew Breksa <andrew@Dennsliu.com>
  */
-class QueueAlreadyExistsException extends Exception
-{
-
-}
+class QueueAlreadyExistsException extends Exception {}

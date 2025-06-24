@@ -1,7 +1,7 @@
 <?php
 
-use AndrewBreksa\RSMQ\Exceptions\QueueParametersValidationException;
-use AndrewBreksa\RSMQ\RSMQClient;
+use Dennsliu\RSMQ\Exceptions\QueueParametersValidationException;
+use Dennsliu\RSMQ\RSMQClient;
 use PHPUnit\Framework\TestCase;
 use Predis\Client;
 
@@ -139,11 +139,12 @@ class RSMQTest extends TestCase
     {
         $this->expectExceptionMessage('Invalid queue name');
         $this->invokeMethod(
-            $this->rsmq, 'validate', [
-                           ['queue' => ' foo']
-                       ]
+            $this->rsmq,
+            'validate',
+            [
+                ['queue' => ' foo']
+            ]
         );
-
     }
 
     /**
@@ -166,9 +167,11 @@ class RSMQTest extends TestCase
     {
         $this->expectExceptionMessage('Visibility time must be');
         $this->invokeMethod(
-            $this->rsmq, 'validate', [
-                           ['vt' => '-1']
-                       ]
+            $this->rsmq,
+            'validate',
+            [
+                ['vt' => '-1']
+            ]
         );
     }
 
@@ -176,9 +179,11 @@ class RSMQTest extends TestCase
     {
         $this->expectExceptionMessage('Invalid message id');
         $this->invokeMethod(
-            $this->rsmq, 'validate', [
-                           ['id' => '123456']
-                       ]
+            $this->rsmq,
+            'validate',
+            [
+                ['id' => '123456']
+            ]
         );
     }
 
@@ -186,9 +191,11 @@ class RSMQTest extends TestCase
     {
         $this->expectExceptionMessage('Delay must be');
         $this->invokeMethod(
-            $this->rsmq, 'validate', [
-                           ['delay' => 99999999]
-                       ]
+            $this->rsmq,
+            'validate',
+            [
+                ['delay' => 99999999]
+            ]
         );
     }
 
@@ -270,7 +277,6 @@ class RSMQTest extends TestCase
         $this->rsmq->createQueue($queue);
         $id = $this->rsmq->sendMessage($queue, 'bar');
         $this->assertTrue($this->rsmq->changeMessageVisibility($queue, $id, 60));
-
     }
 
     public function testGetQueue(): void
@@ -316,7 +322,6 @@ class RSMQTest extends TestCase
         $received = $this->rsmq->popMessage($queue);
 
         $this->assertEmpty($received);
-
     }
 
     public function testSetQueueAttributes(): void
@@ -338,8 +343,6 @@ class RSMQTest extends TestCase
         try {
             $this->rsmq->deleteQueue('foo');
         } catch (Exception $_) {
-
         }
-
     }
 }

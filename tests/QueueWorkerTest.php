@@ -1,16 +1,18 @@
-<?php declare(strict_types=1);
+<?php
 
-use AndrewBreksa\RSMQ\ExecutorInterface;
-use AndrewBreksa\RSMQ\Message;
-use AndrewBreksa\RSMQ\QueueWorker;
-use AndrewBreksa\RSMQ\RSMQClientInterface;
-use AndrewBreksa\RSMQ\WorkerSleepProvider;
+declare(strict_types=1);
+
+use Dennsliu\RSMQ\ExecutorInterface;
+use Dennsliu\RSMQ\Message;
+use Dennsliu\RSMQ\QueueWorker;
+use Dennsliu\RSMQ\RSMQClientInterface;
+use Dennsliu\RSMQ\WorkerSleepProvider;
 use PHPUnit\Framework\TestCase;
 
 /**
  * Class QueueWorkerTest
  *
- * @author Andrew Breksa <andrew@andrewbreksa.com>
+ * @author Andrew Breksa <andrew@Dennsliu.com>
  */
 class QueueWorkerTest extends TestCase
 {

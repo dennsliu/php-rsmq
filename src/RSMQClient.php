@@ -1,19 +1,20 @@
 <?php
+
 declare(strict_types=1);
 
-namespace AndrewBreksa\RSMQ;
+namespace Dennsliu\RSMQ;
 
-use AndrewBreksa\RSMQ\Exceptions\MessageToLongException;
-use AndrewBreksa\RSMQ\Exceptions\QueueAlreadyExistsException;
-use AndrewBreksa\RSMQ\Exceptions\QueueNotFoundException;
-use AndrewBreksa\RSMQ\Exceptions\QueueParametersValidationException;
+use Dennsliu\RSMQ\Exceptions\MessageToLongException;
+use Dennsliu\RSMQ\Exceptions\QueueAlreadyExistsException;
+use Dennsliu\RSMQ\Exceptions\QueueNotFoundException;
+use Dennsliu\RSMQ\Exceptions\QueueParametersValidationException;
 use Predis\ClientInterface;
 
 /**
  * Class RSMQClient
  *
- * @package AndrewBreksa\RSMQ
- * @author  Andrew Breksa <andrew@andrewbreksa.com>
+ * @package Dennsliu\RSMQ
+ * @author  Andrew Breksa <andrew@Dennsliu.com>
  * @author  emre can islambey <eislambey@gmail.com>
  */
 class RSMQClient implements RSMQClientInterface
@@ -178,13 +179,15 @@ class RSMQClient implements RSMQClientInterface
             throw new QueueParametersValidationException('Delay must be between 0 and ' . self::MAX_DELAY);
         }
 
-        if (isset($params['maxsize'])
+        if (
+            isset($params['maxsize'])
             && $params['maxsize'] !== -1 && ($params['maxsize'] < self::MIN_MESSAGE_SIZE || $params['maxsize'] > self::MAX_PAYLOAD_SIZE)
         ) {
             $message = "Maximum message size must be between %d and %d";
             throw new QueueParametersValidationException(
                 sprintf(
-                    $message, self::MIN_MESSAGE_SIZE,
+                    $message,
+                    self::MIN_MESSAGE_SIZE,
                     self::MAX_PAYLOAD_SIZE
                 )
             );
@@ -282,8 +285,8 @@ class RSMQClient implements RSMQClientInterface
         );
 
         /**
- * @psalm-suppress UndefinedMagicMethod 
-*/
+         * @psalm-suppress UndefinedMagicMethod 
+         */
         $transaction = $this->predis->transaction();
         $transaction->hmget("{$this->ns}$name:Q", ['vt', 'delay', 'maxsize']);
         $transaction->time();
@@ -328,8 +331,8 @@ class RSMQClient implements RSMQClientInterface
         $resp = $this->predis->time();
 
         /**
- * @psalm-suppress UndefinedMagicMethod 
-*/
+         * @psalm-suppress UndefinedMagicMethod 
+         */
         $transaction = $this->predis->transaction();
         $transaction->hmget("$key:Q", ['vt', 'delay', 'maxsize', 'totalrecv', 'totalsent', 'created', 'modified']);
         $transaction->zcard($key);
@@ -420,7 +423,8 @@ class RSMQClient implements RSMQClientInterface
         $resp = $this->predis->evalsha(
             $this->receiveMessageSha1,
             3,
-            "{$this->ns}$queue", $q['ts'],
+            "{$this->ns}$queue",
+            $q['ts'],
             $q['ts'] + $vt * 1000
         );
         if (empty($resp)) {

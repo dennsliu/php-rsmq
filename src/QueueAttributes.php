@@ -1,13 +1,15 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 
-namespace AndrewBreksa\RSMQ;
+namespace Dennsliu\RSMQ;
 
 /**
  * Class QueueAttributes
  *
- * @package AndrewBreksa\RSMQ
- * @author  Andrew Breksa <andrew@andrewbreksa.com>
+ * @package Dennsliu\RSMQ
+ * @author  Andrew Breksa <andrew@Dennsliu.com>
  */
 class QueueAttributes
 {
@@ -163,5 +165,4 @@ class QueueAttributes
     {
         return $this->hiddenMessageCount;
     }
-
 }

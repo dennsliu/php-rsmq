@@ -1,19 +1,21 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 
-namespace AndrewBreksa\RSMQ;
+namespace Dennsliu\RSMQ;
 
 
-use AndrewBreksa\RSMQ\Exceptions\MessageToLongException;
-use AndrewBreksa\RSMQ\Exceptions\QueueAlreadyExistsException;
-use AndrewBreksa\RSMQ\Exceptions\QueueNotFoundException;
-use AndrewBreksa\RSMQ\Exceptions\QueueParametersValidationException;
+use Dennsliu\RSMQ\Exceptions\MessageToLongException;
+use Dennsliu\RSMQ\Exceptions\QueueAlreadyExistsException;
+use Dennsliu\RSMQ\Exceptions\QueueNotFoundException;
+use Dennsliu\RSMQ\Exceptions\QueueParametersValidationException;
 
 /**
  * Interface RSMQClientInterface
  *
- * @package AndrewBreksa\RSMQ
- * @author  Andrew Breksa <andrew@andrewbreksa.com>
+ * @package Dennsliu\RSMQ
+ * @author  Andrew Breksa <andrew@Dennsliu.com>
  */
 interface RSMQClientInterface
 {
@@ -114,5 +116,4 @@ interface RSMQClientInterface
      * @throws QueueParametersValidationException
      */
     public function sendMessage(string $queue, string $message, int $delay = null): string;
-
 }

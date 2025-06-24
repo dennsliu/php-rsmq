@@ -1,6 +1,8 @@
-<?php declare(strict_types=1);
+<?php
 
-namespace AndrewBreksa\RSMQ;
+declare(strict_types=1);
+
+namespace Dennsliu\RSMQ;
 
 /**
  * @param  int $length
